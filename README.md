@@ -59,24 +59,25 @@ npm run format:check
 npm run check
 ```
 
-├── .swcrc # SWC configuration
-├── serverless/ # Serverless auxiliaries (variables, env, IAM, etc.)
-│ └── custom/
-│ └── variables.yml # Custom variables used by serverless.yml
-├── serverless.yml # Serverless Framework configuration
-
 ## Project Structure
 
 ```
 ├── src/                    # Source code
 │   └── index.ts           # Main Lambda handler
-├── dist/                  # Compiled JavaScript output
+├── dist/                  # SWC output (mirrors src/, e.g., dist/src/index.js)
+│   └── src/
+│       └── index.js
 ├── .vscode/               # VS Code workspace settings
 │   └── settings.json      # Editor configuration
 ├── eslint.config.mjs      # ESLint configuration
 ├── .prettierrc            # Prettier configuration
 ├── .prettierignore        # Prettier ignore patterns
 ├── tsconfig.json          # TypeScript configuration
+├── .swcrc                 # SWC configuration
+├── serverless/            # Serverless auxiliaries (variables, env, IAM, etc.)
+│   └── custom/
+│       └── variables.yml  # Custom variables used by serverless.yml
+├── serverless.yml         # Serverless Framework configuration
 └── package.json           # Project dependencies and scripts
 ```
 
