@@ -14,7 +14,7 @@ provider:
   #   role: ${file(./serverless/provider/iam.role.yml)}
   deploymentBucket:
     name: ${self:custom.DEPLOYMENT_BUCKET}
-  # environment: ${file(./serverless/provider/environment.yml)}
+  environment: ${file(./serverless/provider/environment.yml)}
   apiGateway:
     binaryMediaTypes:
       - 'application/json'

@@ -16,7 +16,7 @@
     "prebuild": "npm run clean",
     "predev": "npm run clean",
     "check": "npm run type-check && npm run lint && npm run format:check",
-    "deploy:dev": "npm i && sls deploy --stage dev --aws-profile personal",
+    "deploy:dev": "npm i && npm run build && sls deploy --stage dev --aws-profile personal",
     "remove:dev": "sls remove --stage dev --aws-profile personal",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

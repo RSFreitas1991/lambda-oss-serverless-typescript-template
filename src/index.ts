@@ -16,6 +16,7 @@ export const handler = async (
     body: JSON.stringify({
       message: 'Hello from Lambda!',
       timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'not set',
     }),
     headers: {
       'Content-Type': 'application/json',
