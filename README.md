@@ -1,5 +1,7 @@
 # Lambda OSS Serverless TypeScript Template
 
+Built for the OSS Serverless Framework. This template is plug-and-play with OSS Serverless and not intended for other IaC frameworks.
+
 A comprehensive TypeScript template for AWS Lambda functions with ESLint, Prettier, and best practices configured out of the box.
 
 ## Features
@@ -10,6 +12,7 @@ A comprehensive TypeScript template for AWS Lambda functions with ESLint, Pretti
 - ✅ **VS Code Integration** - Pre-configured workspace settings
 - ✅ **Build System** - Automated TypeScript compilation
 - ✅ **Development Scripts** - Common development tasks automated
+- ✅ **OSS Serverless Ready** - Pre-wired deploy/remove scripts using OSS Serverless
 
 ## Quick Start
 
@@ -20,22 +23,29 @@ A comprehensive TypeScript template for AWS Lambda functions with ESLint, Pretti
 
 ### Installation
 
-````bash
+```bash
 # Clone the repository
 git clone <your-repo-url>
+cd lambda-oss-serverless-typescript-template
+
+# Install dependencies
+npm install
+
+# Install OSS Serverless CLI (required)
+npm install -g osls
+```
+
+### Development
 
 ```bash
-# Build the project
+# Build the project (SWC)
 npm run build
 
 # Build in watch mode for development
 npm run dev
 
-# Type checking
-npm run deploy:dev
+# Type checking only
 npm run type-check
-# Remove deployed stack
-npm run remove:dev
 
 # Linting
 npm run lint
@@ -43,14 +53,11 @@ npm run lint:fix
 
 # Code formatting
 npm run format
-├── dist/                  # SWC output (mirrors src/, e.g., dist/src/index.js)
-│   └── src/
-│       └── index.js
 npm run format:check
 
 # Run all checks (type-check + lint + format)
 npm run check
-````
+```
 
 ├── .swcrc # SWC configuration
 ├── serverless/ # Serverless auxiliaries (variables, env, IAM, etc.)
@@ -127,14 +134,20 @@ Workspace settings include:
 | `npm run deploy:dev`   | Build with SWC and deploy with Serverless (dev) |
 | `npm run remove:dev`   | Remove the deployed stack (dev)                 |
 
-## Deployment
+## Deployment (OSS Serverless)
 
-This template focuses on the development setup. For deployment, consider using:
+This template is built for OSS Serverless. Install the CLI and use the provided scripts:
 
-- **AWS SAM** - Serverless Application Model
-- **Serverless Framework** - Multi-cloud serverless framework
-- **AWS CDK** - Infrastructure as Code
-- **Terraform** - Infrastructure as Code
+- OSS Serverless repo: https://github.com/oss-serverless/serverless
+- Install CLI: `npm install -g osls`
+
+```bash
+# Build and deploy to dev using the "personal" AWS profile
+npm run deploy:dev
+
+# Remove the deployed stack
+npm run remove:dev
+```
 
 ## Best Practices
 
