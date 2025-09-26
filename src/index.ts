@@ -1,13 +1,9 @@
-export interface ApiResponse {
-  statusCode: number;
-  body: string;
-  headers?: Record<string, string>;
-}
+import { APIGatewayEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
 
 export const handler = async (
-  event: any,
-  context: any
-): Promise<ApiResponse> => {
+  event: APIGatewayEvent,
+  context: Context
+): Promise<APIGatewayProxyResult> => {
   console.log('Event:', JSON.stringify(event, null, 2));
   console.log('Context:', JSON.stringify(context, null, 2));
 
