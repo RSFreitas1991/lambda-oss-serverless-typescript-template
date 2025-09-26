@@ -20,16 +20,9 @@ A comprehensive TypeScript template for AWS Lambda functions with ESLint, Pretti
 
 ### Installation
 
-```bash
+````bash
 # Clone the repository
 git clone <your-repo-url>
-cd lambda-oss-serverless-typescript-template
-
-# Install dependencies
-npm install
-```
-
-### Development
 
 ```bash
 # Build the project
@@ -39,7 +32,10 @@ npm run build
 npm run dev
 
 # Type checking
+npm run deploy:dev
 npm run type-check
+# Remove deployed stack
+npm run remove:dev
 
 # Linting
 npm run lint
@@ -47,11 +43,20 @@ npm run lint:fix
 
 # Code formatting
 npm run format
+├── dist/                  # SWC output (mirrors src/, e.g., dist/src/index.js)
+│   └── src/
+│       └── index.js
 npm run format:check
 
 # Run all checks (type-check + lint + format)
 npm run check
-```
+````
+
+├── .swcrc # SWC configuration
+├── serverless/ # Serverless auxiliaries (variables, env, IAM, etc.)
+│ └── custom/
+│ └── variables.yml # Custom variables used by serverless.yml
+├── serverless.yml # Serverless Framework configuration
 
 ## Project Structure
 
@@ -68,6 +73,8 @@ npm run check
 └── package.json           # Project dependencies and scripts
 ```
 
+> Note: The `dist/` folder is hidden in VS Code by default in this template. This is configured in `.vscode/settings.json` under `files.exclude` and `search.exclude`. You can still access it in the terminal or make it visible by removing the corresponding exclude rules.
+
 ## Configuration
 
 ### TypeScript
@@ -76,13 +83,8 @@ The `tsconfig.json` is configured for AWS Lambda development with:
 
 - **Target**: ES2020 for modern Node.js runtime
 - **Module**: CommonJS for Lambda compatibility
-- **Strict mode** enabled for type safety
-- **Source maps** for debugging
-- **Declaration files** for type definitions
 
 ### ESLint
-
-ESLint is configured with:
 
 - TypeScript-specific rules
 - Prettier integration
@@ -110,41 +112,20 @@ Workspace settings include:
 
 ## Available Scripts
 
-| Script                 | Description                           |
-| ---------------------- | ------------------------------------- |
-| `npm run build`        | Compile TypeScript to JavaScript      |
-| `npm run build:watch`  | Compile in watch mode                 |
-| `npm run dev`          | Alias for build:watch                 |
-| `npm run clean`        | Remove build artifacts                |
-| `npm run type-check`   | Type check without compilation        |
-| `npm run lint`         | Run ESLint                            |
-| `npm run lint:fix`     | Fix ESLint issues                     |
-| `npm run format`       | Format code with Prettier             |
-| `npm run format:check` | Check code formatting                 |
-| `npm run check`        | Run all checks (type + lint + format) |
-
-## Lambda Handler
-
-The template includes a basic Lambda handler in `src/index.ts`:
-
-```typescript
-export const handler = async (
-  event: any,
-  context: any
-): Promise<ApiResponse> => {
-  // Your Lambda logic here
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Hello from Lambda!',
-      timestamp: new Date().toISOString(),
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-};
-```
+| Script                 | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| `npm run build`        | Transpile with SWC to `dist/`                   |
+| `npm run build:watch`  | Transpile with SWC in watch mode                |
+| `npm run dev`          | Alias for build:watch                           |
+| `npm run clean`        | Remove build artifacts                          |
+| `npm run type-check`   | Type check with `tsc --noEmit`                  |
+| `npm run lint`         | Run ESLint                                      |
+| `npm run lint:fix`     | Fix ESLint issues                               |
+| `npm run format`       | Format code with Prettier                       |
+| `npm run format:check` | Check code formatting                           |
+| `npm run check`        | Run all checks (type + lint + format)           |
+| `npm run deploy:dev`   | Build with SWC and deploy with Serverless (dev) |
+| `npm run remove:dev`   | Remove the deployed stack (dev)                 |
 
 ## Deployment
 
@@ -175,4 +156,4 @@ This template focuses on the development setup. For deployment, consider using:
 
 ## License
 
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
