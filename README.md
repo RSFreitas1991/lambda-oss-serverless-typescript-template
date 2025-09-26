@@ -1,0 +1,1 @@
+# lambda-oss-serverless-typescript-template
