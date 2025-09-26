@@ -1,4 +1,4 @@
-service: lambda-oss-serverless-typescript-template
+service: my-lambda-oss
 plugins:
   - serverless-deployment-bucket
 
@@ -13,8 +13,8 @@ provider:
   # iam:
   #   role: ${file(./serverless/provider/iam.role.yml)}
   deploymentBucket:
-    name: timely-serverless-artifacts-${sls:stage}
-  environment: ${file(./serverless/provider/environment.yml)}
+    name: ${self:custom.DEPLOYMENT_BUCKET}
+  # environment: ${file(./serverless/provider/environment.yml)}
   apiGateway:
     binaryMediaTypes:
       - 'application/json'
@@ -22,10 +22,10 @@ provider:
 
 functions:
   helloWorld:
-    handler: dist/index.handler
+    handler: dist/src/index.handler
     timeout: 29
     events:
-      - http:
+      - httpApi:
           method: GET
           path: /
 
