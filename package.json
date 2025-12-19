@@ -2,7 +2,7 @@
   "name": "lambda-oss-serverless-typescript-template",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "build": "swc src -d dist --copy-files",
     "build:watch": "swc src -d dist --watch --copy-files",
